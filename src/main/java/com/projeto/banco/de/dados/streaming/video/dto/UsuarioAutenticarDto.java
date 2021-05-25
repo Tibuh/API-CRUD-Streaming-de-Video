@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 @Getter
 @AllArgsConstructor @NoArgsConstructor
 public class UsuarioAutenticarDto {
-
-	private String nome;
 	
 	private String email;
 	
