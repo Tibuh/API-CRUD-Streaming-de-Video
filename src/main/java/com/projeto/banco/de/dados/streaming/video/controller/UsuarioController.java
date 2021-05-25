@@ -18,7 +18,7 @@ public class UsuarioController {
 	private UsuarioService usuarioServico;
 
 	@PostMapping("/autenticar")
-	public ResponseEntity<UsuarioAutenticarDto> autenticarUsuario(@RequestBody UsuarioAutenticarDto usuarioDto) {
-		return ResponseEntity.ok().body(usuarioServico.autenticar(usuarioDto));
+	public ResponseEntity<String> autenticarUsuario(@RequestBody UsuarioAutenticarDto usuarioDto) {
+		return ResponseEntity.ok(usuarioServico.autenticar(usuarioDto));
 	}
 }

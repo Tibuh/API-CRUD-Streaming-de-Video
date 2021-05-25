@@ -7,7 +7,7 @@ import com.projeto.banco.de.dados.streaming.video.dto.UsuarioAutenticarDto;
 @Service
 public class UsuarioService {
 
-	public UsuarioAutenticarDto autenticar(UsuarioAutenticarDto usuarioDto) {
-		return usuarioDto;
+	public String autenticar(UsuarioAutenticarDto usuarioDto) {
+		return "Logado com sucesso.";
 	}
 }
