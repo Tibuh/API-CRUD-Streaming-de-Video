@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FilmeDto {
 
+	private Long idFilme;
+
 	private String titulo;
 
 	private String sinopse;
@@ -28,6 +30,7 @@ public class FilmeDto {
 	private List<GeneroDto> listaGenero;
 
 	public FilmeDto(Filme filme) {
+		this.idFilme = filme.getIdTitulo();
 		this.titulo = filme.getTitulo();
 		this.sinopse = filme.getSinopse();
 		this.ano = filme.getAno();

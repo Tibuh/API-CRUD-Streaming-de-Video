@@ -47,6 +47,17 @@ public class SerieService {
 		throw new ExcecaoNegocio("Nao foi encontrada uma serie para o identificador passado.");
 	}
 
+	public EpisodioDto findEpisodioById(Long idEpisodio) {
+
+		Optional<Episodio> episodio = episodioRepository.findById(idEpisodio);
+
+		if (episodio.isPresent()) {
+			return new EpisodioDto(episodio.get());
+		}
+
+		throw new ExcecaoNegocio("Nao foi encontrada um episodio para o identificador passado.");
+	}
+
 	public Long insertSerie(SerieDto serieDto) {
 
 		if (serieDto != null) {

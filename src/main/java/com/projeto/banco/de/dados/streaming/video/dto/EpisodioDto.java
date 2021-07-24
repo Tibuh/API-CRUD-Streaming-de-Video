@@ -7,8 +7,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class EpisodioDto {
+
+	private Long idEpisodio;
 
 	private int numero;
 
@@ -19,6 +22,7 @@ public class EpisodioDto {
 	private int temporada;
 
 	public EpisodioDto(Episodio episodio) {
+		this.idEpisodio = episodio.getIdEpisodio();
 		this.numero = episodio.getNumero();
 		this.titulo = episodio.getTitulo();
 		this.sinopse = episodio.getSinopse();

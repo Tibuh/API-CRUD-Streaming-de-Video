@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UsuarioSistemaDto {
 
+	private Long idUsuarioSistema;
+
 	private String login;
 
 	private String nome;
@@ -18,8 +20,9 @@ public class UsuarioSistemaDto {
 	private String senha;
 
 	private boolean administrador;
-	
+
 	public UsuarioSistemaDto(UsuarioSistema usuarioSistema) {
+		this.idUsuarioSistema = usuarioSistema.getIdUsuarioSistema();
 		this.login = usuarioSistema.getLogin();
 		this.nome = usuarioSistema.getNome();
 		this.senha = usuarioSistema.getSenha();

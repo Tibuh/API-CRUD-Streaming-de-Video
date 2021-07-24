@@ -7,12 +7,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@AllArgsConstructor @NoArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class GeneroDto {
+
+	private Long idGenero;
 
 	private String genero;
 
 	public GeneroDto(Genero genero) {
+		this.idGenero = genero.getIdGenero();
 		this.genero = genero.getGenero();
 	}
 }

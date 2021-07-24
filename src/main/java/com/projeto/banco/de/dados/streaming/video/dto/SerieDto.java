@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SerieDto {
 
+	private Long idSerie;
+
 	private String titulo;
 
 	private String sinopse;
@@ -32,13 +34,13 @@ public class SerieDto {
 	List<EpisodioDto> listaEpisodio;
 
 	public SerieDto(Serie serie) {
+		this.idSerie = serie.getIdTitulo();
 		this.titulo = serie.getTitulo();
 		this.sinopse = serie.getSinopse();
 		this.ano = serie.getAno();
 		this.numeroTemporada = serie.getNumeroTemporada();
 		this.anoFim = serie.getAnoFim();
-		this.listaGenero = serie.getGeneros().stream()
-				.map(genero -> new GeneroDto(genero))
+		this.listaGenero = serie.getGeneros().stream().map(genero -> new GeneroDto(genero))
 				.collect(Collectors.toList());
 		this.listaEpisodio = serie.getEpisodios().stream().map(episodio -> new EpisodioDto(episodio))
 				.collect(Collectors.toList());
