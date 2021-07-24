@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.projeto.banco.de.dados.streaming.video.dto.GeneroDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,7 +30,10 @@ public class Genero implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_genero")
 	private Long idGenero;
-	
+
 	private String genero;
 
+	public Genero(GeneroDto generoDto) {
+		this.genero = generoDto.getGenero();
+	}
 }

@@ -28,22 +28,22 @@ public class UsuarioSistemaController {
 		return ResponseEntity.ok().body(usuarioServico.findAll());
 	}
 
-	@GetMapping("/find-by-id/{id}")
+	@GetMapping("/find-by-id/{idUsuarioSistema}")
 	public ResponseEntity<UsuarioSistemaDto> findById(@PathVariable Long idUsuarioSistema) {
 		return ResponseEntity.ok().body(usuarioServico.findById(idUsuarioSistema));
 	}
 
-	@PostMapping("/insert-user")
+	@PostMapping("/insert")
 	public ResponseEntity<Long> insertUser(@RequestBody UsuarioSistemaDto usuarioSistemaDto) {
 		return ResponseEntity.ok().body(usuarioServico.insertUser(usuarioSistemaDto));
 	}
 
-	@PostMapping("/update-user")
+	@PostMapping("/update")
 	public ResponseEntity<Long> updateUser(@RequestBody AtualizarUsuarioSistemaDto atualilzarUsuarioSistemaDto) {
 		return ResponseEntity.ok().body(usuarioServico.updateUser(atualilzarUsuarioSistemaDto));
 	}
 
-	@PostMapping("/delete-user/{id}")
+	@PostMapping("/delete/{idUsuarioSistema}")
 	public ResponseEntity<String> deleteUser(@PathVariable Long idUsuarioSistema) {
 		return ResponseEntity.ok().body(usuarioServico.deleteUser(idUsuarioSistema));
 	}
