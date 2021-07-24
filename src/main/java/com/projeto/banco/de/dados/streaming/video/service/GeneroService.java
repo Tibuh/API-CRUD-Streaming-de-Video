@@ -75,4 +75,12 @@ public class GeneroService {
 
 		throw new ExcecaoNegocio("Nao foi encontrado um genero para este identificador.");
 	}
+
+	protected Long persisteGenero(GeneroDto generoDto) {
+
+		Optional<Genero> genero = generoRepository.findByGenero(generoDto.getGenero());
+
+		return genero.isPresent() ? genero.get().getIdGenero() : insertGenero(generoDto);
+	}
+
 }

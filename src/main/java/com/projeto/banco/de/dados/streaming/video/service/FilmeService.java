@@ -9,12 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.projeto.banco.de.dados.streaming.video.dto.AtualizarFilmeDto;
 import com.projeto.banco.de.dados.streaming.video.dto.FilmeDto;
-import com.projeto.banco.de.dados.streaming.video.dto.GeneroDto;
 import com.projeto.banco.de.dados.streaming.video.entity.Filme;
 import com.projeto.banco.de.dados.streaming.video.entity.Genero;
 import com.projeto.banco.de.dados.streaming.video.exception.ExcecaoNegocio;
 import com.projeto.banco.de.dados.streaming.video.repositoy.FilmeRepository;
-import com.projeto.banco.de.dados.streaming.video.repositoy.GeneroRepository;
 
 @Service
 public class FilmeService {
@@ -24,9 +22,6 @@ public class FilmeService {
 
 	@Autowired
 	private FilmeRepository filmeRepository;
-
-	@Autowired
-	private GeneroRepository generoRepository;
 
 	public List<FilmeDto> findAll() {
 		return filmeRepository.findAll().stream().map(filme -> new FilmeDto(filme)).collect(Collectors.toList());
@@ -57,7 +52,7 @@ public class FilmeService {
 
 			filme.setGeneros(filmeDto.getListaGenero().stream().map(genero -> {
 				Genero generoNew = new Genero();
-				generoNew.setIdGenero(persisteGenero(genero));
+				generoNew.setIdGenero(generoService.persisteGenero(genero));
 				return generoNew;
 			}).collect(Collectors.toList()));
 			return filmeRepository.save(filme).getIdTitulo();
@@ -82,7 +77,7 @@ public class FilmeService {
 
 				filme.get().setGeneros(atualizarFilmeDto.getListaGenero().stream().map(genero -> {
 					Genero generoNew = new Genero();
-					generoNew.setIdGenero(persisteGenero(genero));
+					generoNew.setIdGenero(generoService.persisteGenero(genero));
 					return generoNew;
 				}).collect(Collectors.toList()));
 
@@ -107,10 +102,4 @@ public class FilmeService {
 		throw new ExcecaoNegocio("Filme nao encontrado para o identificador recebido.");
 	}
 
-	private Long persisteGenero(GeneroDto generoDto) {
-
-		Optional<Genero> genero = generoRepository.findByGenero(generoDto.getGenero());
-
-		return genero.isPresent() ? genero.get().getIdGenero() : generoService.insertGenero(generoDto);
-	}
 }

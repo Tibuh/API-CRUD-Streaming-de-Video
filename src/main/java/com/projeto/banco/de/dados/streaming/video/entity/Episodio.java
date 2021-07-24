@@ -30,7 +30,7 @@ public class Episodio implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_episodio")
-	private Long idVideo;
+	private Long idEpisodio;
 
 	private int numero;
 
@@ -45,5 +45,6 @@ public class Episodio implements Serializable {
 	private Video video;
 
 	@ManyToOne
+	@JoinColumn(name="idTitulo")
 	private Serie serie;
 }
