@@ -1,7 +1,6 @@
 package com.projeto.banco.de.dados.streaming.video.dto;
 
 import java.time.LocalDate;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -25,5 +24,5 @@ public class AtualizarFilmeDto {
 	@JsonFormat(pattern = "dd-MM-yyyy")
 	private LocalDate dataLancamento;
 
-	private List<GeneroDto> listaGenero;
+	private String listaGenero;
 }

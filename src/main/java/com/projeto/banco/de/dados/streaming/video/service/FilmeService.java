@@ -80,9 +80,11 @@ public class FilmeService {
 
 				filme.get().setDataLancamento(atualizarFilmeDto.getDataLancamento());
 
-				filme.get().setGeneros(atualizarFilmeDto.getListaGenero().stream().map(genero -> {
+				List<String> listaGenero = Arrays.asList(atualizarFilmeDto.getListaGenero().split(","));
+
+				filme.get().setGeneros(listaGenero.stream().map(genero -> {
 					Genero generoNew = new Genero();
-					generoNew.setIdGenero(generoService.persisteGenero(genero));
+					generoNew.setIdGenero(generoService.persisteGenero(new GeneroDto(genero.trim())));
 					return generoNew;
 				}).collect(Collectors.toList()));
 
