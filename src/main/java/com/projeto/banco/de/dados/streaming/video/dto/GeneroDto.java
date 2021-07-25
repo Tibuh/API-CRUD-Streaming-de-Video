@@ -19,4 +19,8 @@ public class GeneroDto {
 		this.idGenero = genero.getIdGenero();
 		this.genero = genero.getGenero();
 	}
+
+	public GeneroDto(String genero) {
+		this.genero = genero;
+	}
 }

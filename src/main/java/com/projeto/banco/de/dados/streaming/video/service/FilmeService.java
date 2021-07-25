@@ -1,5 +1,6 @@
 package com.projeto.banco.de.dados.streaming.video.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Service;
 
 import com.projeto.banco.de.dados.streaming.video.dto.AtualizarFilmeDto;
 import com.projeto.banco.de.dados.streaming.video.dto.FilmeDto;
+import com.projeto.banco.de.dados.streaming.video.dto.GeneroDto;
+import com.projeto.banco.de.dados.streaming.video.dto.InsertFilmeDto;
 import com.projeto.banco.de.dados.streaming.video.entity.Filme;
 import com.projeto.banco.de.dados.streaming.video.entity.Genero;
 import com.projeto.banco.de.dados.streaming.video.exception.ExcecaoNegocio;
@@ -37,22 +40,24 @@ public class FilmeService {
 		throw new ExcecaoNegocio("Filme nao encontrado para o identificador passado.");
 	}
 
-	public Long insertFilme(FilmeDto filmeDto) {
+	public Long insertFilme(InsertFilmeDto insertFilmeDto) {
 
-		if (filmeDto != null) {
+		if (insertFilmeDto != null) {
 			Filme filme = new Filme();
 
-			filme.setTitulo(filmeDto.getTitulo());
+			filme.setTitulo(insertFilmeDto.getTitulo());
 
-			filme.setSinopse(filmeDto.getSinopse());
+			filme.setSinopse(insertFilmeDto.getSinopse());
 
-			filme.setAno(filmeDto.getAno());
+			filme.setAno(insertFilmeDto.getAno());
 
-			filme.setDataLancamento(filmeDto.getDataLancamento());
+			filme.setDataLancamento(insertFilmeDto.getDataLancamento());
 
-			filme.setGeneros(filmeDto.getListaGenero().stream().map(genero -> {
+			List<String> listaGenero = Arrays.asList(insertFilmeDto.getListaGenero().split(","));
+			
+			filme.setGeneros(listaGenero.stream().map(genero -> {
 				Genero generoNew = new Genero();
-				generoNew.setIdGenero(generoService.persisteGenero(genero));
+				generoNew.setIdGenero(generoService.persisteGenero(new GeneroDto(genero.trim())));
 				return generoNew;
 			}).collect(Collectors.toList()));
 			return filmeRepository.save(filme).getIdTitulo();

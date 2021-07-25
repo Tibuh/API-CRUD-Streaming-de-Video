@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.projeto.banco.de.dados.streaming.video.dto.AtualizarFilmeDto;
 import com.projeto.banco.de.dados.streaming.video.dto.FilmeDto;
+import com.projeto.banco.de.dados.streaming.video.dto.InsertFilmeDto;
 import com.projeto.banco.de.dados.streaming.video.service.FilmeService;
 
 @RestController
@@ -33,8 +34,8 @@ public class FilmeController {
 	}
 
 	@PostMapping("/insert")
-	public ResponseEntity<Long> insertFilme(@RequestBody FilmeDto filmeDto) {
-		return ResponseEntity.ok().body(filmeService.insertFilme(filmeDto));
+	public ResponseEntity<Long> insertFilme(@RequestBody InsertFilmeDto insertFilmeDto) {
+		return ResponseEntity.ok().body(filmeService.insertFilme(insertFilmeDto));
 	}
 
 	@PostMapping("/update")
