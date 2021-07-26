@@ -15,6 +15,7 @@ import com.projeto.banco.de.dados.streaming.video.dto.EpisodioDto;
 import com.projeto.banco.de.dados.streaming.video.dto.GeneroDto;
 import com.projeto.banco.de.dados.streaming.video.dto.InformacaoEpisodioDto;
 import com.projeto.banco.de.dados.streaming.video.dto.InsertSerieDto;
+import com.projeto.banco.de.dados.streaming.video.dto.ListagemEpisodioDto;
 import com.projeto.banco.de.dados.streaming.video.dto.SerieDto;
 import com.projeto.banco.de.dados.streaming.video.entity.Episodio;
 import com.projeto.banco.de.dados.streaming.video.entity.Genero;
@@ -61,12 +62,12 @@ public class SerieService {
 		throw new ExcecaoNegocio("Nao foi encontrada um episodio para o identificador passado.");
 	}
 
-	public List<EpisodioDto> findEpisodioByIdSerie(Long idSerie) {
+	public List<ListagemEpisodioDto> findEpisodioByIdSerie(Long idSerie) {
 		Serie serie = new Serie();
 		serie.setIdTitulo(idSerie);
 
 		if (episodioRepository.existsBySerie(serie)) {
-			return episodioRepository.findBySerie(serie).stream().map(episodio -> new EpisodioDto(episodio))
+			return episodioRepository.findBySerie(serie).stream().map(episodio -> new ListagemEpisodioDto(episodio))
 					.collect(Collectors.toList());
 		}
 

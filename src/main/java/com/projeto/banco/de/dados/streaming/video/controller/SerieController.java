@@ -16,6 +16,7 @@ import com.projeto.banco.de.dados.streaming.video.dto.AtualizarSerieDto;
 import com.projeto.banco.de.dados.streaming.video.dto.EpisodioDto;
 import com.projeto.banco.de.dados.streaming.video.dto.InformacaoEpisodioDto;
 import com.projeto.banco.de.dados.streaming.video.dto.InsertSerieDto;
+import com.projeto.banco.de.dados.streaming.video.dto.ListagemEpisodioDto;
 import com.projeto.banco.de.dados.streaming.video.dto.SerieDto;
 import com.projeto.banco.de.dados.streaming.video.service.SerieService;
 
@@ -42,7 +43,7 @@ public class SerieController {
 	}
 
 	@GetMapping("/find-episodio-by-id-serie/{idSerie}")
-	public ResponseEntity<List<EpisodioDto>> findEpisodioByIdSerie(@PathVariable Long idSerie) {
+	public ResponseEntity<List<ListagemEpisodioDto>> findEpisodioByIdSerie(@PathVariable Long idSerie) {
 		return ResponseEntity.ok().body(serieService.findEpisodioByIdSerie(idSerie));
 	}
 
