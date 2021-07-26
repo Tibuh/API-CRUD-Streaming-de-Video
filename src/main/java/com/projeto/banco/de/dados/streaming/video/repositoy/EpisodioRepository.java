@@ -1,5 +1,7 @@
 package com.projeto.banco.de.dados.streaming.video.repositoy;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +13,8 @@ import com.projeto.banco.de.dados.streaming.video.entity.Serie;
 public interface EpisodioRepository extends JpaRepository<Episodio, Long> {
 
 	boolean existsBySerie(Serie serie);
+
+	List<Episodio> findBySerie(Serie serie);
 
 	@Modifying
 	@Query(value = "DELETE FROM episodio WHERE id_titulo = :idSerie", nativeQuery = true)

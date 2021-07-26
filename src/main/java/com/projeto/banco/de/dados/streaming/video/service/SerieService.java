@@ -61,6 +61,18 @@ public class SerieService {
 		throw new ExcecaoNegocio("Nao foi encontrada um episodio para o identificador passado.");
 	}
 
+	public List<EpisodioDto> findEpisodioByIdSerie(Long idSerie) {
+		Serie serie = new Serie();
+		serie.setIdTitulo(idSerie);
+
+		if (episodioRepository.existsBySerie(serie)) {
+			return episodioRepository.findBySerie(serie).stream().map(episodio -> new EpisodioDto(episodio))
+					.collect(Collectors.toList());
+		}
+
+		throw new ExcecaoNegocio("Nao existe episodio cadastrado para a serie informada.");
+	}
+
 	public Long insertSerie(InsertSerieDto insertSerieDto) {
 
 		if (insertSerieDto != null) {

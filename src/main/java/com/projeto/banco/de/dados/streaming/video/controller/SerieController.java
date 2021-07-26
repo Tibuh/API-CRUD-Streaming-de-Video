@@ -41,6 +41,11 @@ public class SerieController {
 		return ResponseEntity.ok().body(serieService.findEpisodioById(idEpisodio));
 	}
 
+	@GetMapping("/find-episodio-by-id-serie/{idSerie}")
+	public ResponseEntity<List<EpisodioDto>> findEpisodioByIdSerie(@PathVariable Long idSerie) {
+		return ResponseEntity.ok().body(serieService.findEpisodioByIdSerie(idSerie));
+	}
+
 	@PostMapping("/insert-serie")
 	public ResponseEntity<Long> insertSerie(@RequestBody InsertSerieDto serieDtoDto) {
 		return ResponseEntity.ok().body(serieService.insertSerie(serieDtoDto));

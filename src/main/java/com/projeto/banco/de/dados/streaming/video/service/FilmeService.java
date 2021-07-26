@@ -54,7 +54,7 @@ public class FilmeService {
 			filme.setDataLancamento(insertFilmeDto.getDataLancamento());
 
 			List<String> listaGenero = Arrays.asList(insertFilmeDto.getListaGenero().split(","));
-			
+
 			filme.setGeneros(listaGenero.stream().map(genero -> {
 				Genero generoNew = new Genero();
 				generoNew.setIdGenero(generoService.persisteGenero(new GeneroDto(genero.trim())));
