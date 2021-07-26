@@ -29,7 +29,7 @@ public class ListagemEpisodioDto {
 		this.titulo = episodio.getTitulo();
 		this.sinopse = episodio.getSinopse();
 		this.temporada = episodio.getTemporada();
-		this.idEpisodio = episodio.getSerie().getIdTitulo();
+		this.idSerie = episodio.getSerie().getIdTitulo();
 	}
 
 }
