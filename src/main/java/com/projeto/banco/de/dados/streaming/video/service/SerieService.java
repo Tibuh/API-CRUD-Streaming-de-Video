@@ -1,5 +1,6 @@
 package com.projeto.banco.de.dados.streaming.video.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.projeto.banco.de.dados.streaming.video.dto.AtualizarEpisodioDto;
 import com.projeto.banco.de.dados.streaming.video.dto.AtualizarSerieDto;
 import com.projeto.banco.de.dados.streaming.video.dto.EpisodioDto;
+import com.projeto.banco.de.dados.streaming.video.dto.GeneroDto;
 import com.projeto.banco.de.dados.streaming.video.dto.InformacaoEpisodioDto;
+import com.projeto.banco.de.dados.streaming.video.dto.InsertSerieDto;
 import com.projeto.banco.de.dados.streaming.video.dto.SerieDto;
 import com.projeto.banco.de.dados.streaming.video.entity.Episodio;
 import com.projeto.banco.de.dados.streaming.video.entity.Genero;
@@ -58,30 +61,32 @@ public class SerieService {
 		throw new ExcecaoNegocio("Nao foi encontrada um episodio para o identificador passado.");
 	}
 
-	public Long insertSerie(SerieDto serieDto) {
+	public Long insertSerie(InsertSerieDto insertSerieDto) {
 
-		if (serieDto != null) {
+		if (insertSerieDto != null) {
 			Serie serie = new Serie();
 
-			serie.setTitulo(serieDto.getTitulo());
+			serie.setTitulo(insertSerieDto.getTitulo());
 
-			serie.setSinopse(serieDto.getSinopse());
+			serie.setSinopse(insertSerieDto.getSinopse());
 
-			serie.setAno(serieDto.getAno());
+			serie.setAno(insertSerieDto.getAno());
 
-			serie.setNumeroTemporada(serieDto.getNumeroTemporada());
+			serie.setNumeroTemporada(insertSerieDto.getNumeroTemporada());
 
-			serie.setAnoFim(serieDto.getAnoFim());
+			serie.setAnoFim(insertSerieDto.getAnoFim());
 
-			serie.setGeneros(serieDto.getListaGenero().stream().map(genero -> {
+			List<String> listaGenero = Arrays.asList(insertSerieDto.getListaGenero().split(","));
+
+			serie.setGeneros(listaGenero.stream().map(genero -> {
 				Genero generoNew = new Genero();
-				generoNew.setIdGenero(generoService.persisteGenero(genero));
+				generoNew.setIdGenero(generoService.persisteGenero(new GeneroDto(genero)));
 				return generoNew;
 			}).collect(Collectors.toList()));
 
 			serie = serieRepository.save(serie);
 
-			for (EpisodioDto episodioDto : serieDto.getListaEpisodio()) {
+			for (EpisodioDto episodioDto : insertSerieDto.getListaEpisodio()) {
 				Episodio episodio = new Episodio();
 
 				episodio.setNumero(episodioDto.getNumero());
@@ -151,9 +156,11 @@ public class SerieService {
 
 				serie.get().setAnoFim(atualizarSerieDto.getAnoFim());
 
-				serie.get().setGeneros(atualizarSerieDto.getListaGenero().stream().map(genero -> {
+				List<String> listaGenero = Arrays.asList(atualizarSerieDto.getListaGenero().split(","));
+
+				serie.get().setGeneros(listaGenero.stream().map(genero -> {
 					Genero generoNew = new Genero();
-					generoNew.setIdGenero(generoService.persisteGenero(genero));
+					generoNew.setIdGenero(generoService.persisteGenero(new GeneroDto(genero)));
 					return generoNew;
 				}).collect(Collectors.toList()));
 

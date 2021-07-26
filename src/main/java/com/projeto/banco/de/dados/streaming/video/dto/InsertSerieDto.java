@@ -1,6 +1,7 @@
 package com.projeto.banco.de.dados.streaming.video.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class AtualizarSerieDto {
+public class InsertSerieDto {
 
 	private Long idSerie;
 
@@ -27,4 +28,7 @@ public class AtualizarSerieDto {
 	private LocalDate anoFim;
 
 	private String listaGenero;
+
+	List<EpisodioDto> listaEpisodio;
+
 }
